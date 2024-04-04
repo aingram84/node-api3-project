@@ -42,8 +42,9 @@ router.put('/:id', validateUser, validateUserId, (req, res, next) => {
 router.delete('/:id', validateUserId, async (req, res, next) => {
 
   try {
+    let currentUser = User.getById(req.params.id)
     await User.remove(req.params.id)
-    res.json(req.user)
+    res.json(currentUser)
   } catch (err) {
     next(err)
   }
